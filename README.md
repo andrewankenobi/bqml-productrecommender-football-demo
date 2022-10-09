@@ -107,7 +107,7 @@ In the `actionable` dataset, persist the result of the query below in a table ca
 ```
 SELECT
   *
-FROM ( /*40% chance buys a product type 1 bet at the beginning if they have a fav team, and customergroup is 1*/
+FROM ( /*40% chance buys a product type 1 at the beginning if they have a fav team, and customergroup is 1*/
   SELECT
     a.PlayerID,
     b.id,
@@ -128,7 +128,7 @@ FROM ( /*40% chance buys a product type 1 bet at the beginning if they have a fa
     AND (b.home=a.FavTeam
       OR b.away=a.FavTeam)
   UNION ALL
-    /*35% chance buys a product type 2 bet if customergroup is 2,3,4, time bucket between 4 and 17, and there's a penalty either missed or scored*/
+    /*35% chance buys a product type 2 if customergroup is 2,3,4, time bucket between 4 and 17, and there's a penalty either missed or scored*/
   SELECT
     a.PlayerID,
     b.id,
