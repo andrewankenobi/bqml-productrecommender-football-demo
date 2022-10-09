@@ -235,7 +235,7 @@ FROM (
 ```
 
 
-## Create a CustomerGroup Classifier model
+### Create a CustomerGroup Classifier model
 In the `actionable` dataset, training a KMEANS model called `CustomerGroupClassifier` defined as follows (execution time below 2mins):
 ```
 CREATE OR REPLACE MODEL
@@ -247,7 +247,7 @@ FROM
   `bq-ml-football.curated.model-training`;
 ```
 
-## Create a Product-Predictor recommender model
+### Create a Product-Predictor recommender model
 In the `actionable` dataset, training a BOOSTED_TREE_CLASSIFIER model called `product-predictor` defined as follows (execution time ~10 mins):
 ```
 CREATE OR REPLACE MODEL `bq-ml-football.actionable.product-predictor`
@@ -263,3 +263,10 @@ OPTIONS(MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',
        INPUT_LABEL_COLS = ['product_type'])
 AS SELECT * FROM `bq-ml-football.curated.model-training`;
 ```
+
+
+
+## Demo execution
+
+### Classify customers in group
+In the `curated` dataset, persist the result of the query below in a table called `model-training`:
