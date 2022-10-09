@@ -6,9 +6,9 @@ This outsources demo showcases how to create a product recommender system to be 
 
 ### Baseline Data
 The foundational data is available [in this Google Drive folder](https://drive.google.com/drive/folders/1V5q155BDNohhlCbMxIp5YbDMJOThU5kG?usp=sharing); three files are available: 
-- events-raw.csv
-- matches-raw.csv
-- customers.csv
+- `events-raw.csv`
+- `matches-raw.csv`
+- `customers.csv`
 
 ### Import the baseline data into BigQuery
 - Create a BigQuery project, e.g. `bq-ml-football`
@@ -100,4 +100,97 @@ SELECT
  sum(tot_ev) over (partition by id order by time_bucket) as tot_ev
 FROM
  `bq-ml-football.curated.features-events`
+```
+
+### Generate product buying activity
+- In the `actionable` dataset, persist the result of the query below in a table called `customers-activity`:
+```
+SELECT
+  *
+FROM ( /*40% chance buys a product type 1 bet at the beginning if they have a fav team, and customergroup is 1*/
+  SELECT
+    a.PlayerID,
+    b.id,
+    b.time_bucket,
+    CASE
+      WHEN ROUND(RAND()-0.1) =1 THEN 1
+    ELSE
+    NULL
+  END
+    AS product_type
+  FROM
+    `bq-ml-football.actionable.customers`a,
+    `bq-ml-football.curated.features-events-cumulative` b
+  WHERE
+    a.FavTeam IS NOT NULL
+    AND a.CustomerGroup =1
+    AND time_bucket =0
+    AND (b.home=a.FavTeam
+      OR b.away=a.FavTeam)
+  UNION ALL
+    /*35% chance buys a product type 2 bet if customergroup is 2,3,4, time bucket between 4 and 17, and there's a penalty either missed or scored*/
+  SELECT
+    a.PlayerID,
+    b.id,
+    b.time_bucket,
+    CASE
+      WHEN ROUND(RAND()-0.15) =1 THEN 2
+    ELSE
+    NULL
+  END
+    AS product_type
+  FROM
+    `bq-ml-football.actionable.customers`a,
+    `bq-ml-football.curated.features-events` b
+  WHERE
+    CustomerGroup IN (2,
+      3,
+      4)
+    AND time_bucket BETWEEN 4
+    AND 17
+    AND (b.ev_penaltymissed >0
+      OR b.ev_penaltyscored>0)
+  UNION ALL
+    /*40% chance buys a product type 3 if they have a fav team, bet between timebuckets 8 and 14, more than 2 subs and group in 0,1,5*/
+  SELECT
+    a.PlayerID,
+    b.id,
+    b.time_bucket,
+    CASE
+      WHEN ROUND(RAND()-0.1) =1 THEN 3
+    ELSE
+    NULL
+  END
+    AS product_type
+  FROM
+    `bq-ml-football.actionable.customers`a,
+    `bq-ml-football.curated.features-events` b
+  WHERE
+    a.FavTeam IS NOT NULL
+    AND a.CustomerGroup IN (0,
+      1,
+      5)
+    AND time_bucket BETWEEN 8
+    AND 14
+    AND (b.ev_sub >1)
+    AND (b.home=a.FavTeam
+      OR b.away=a.FavTeam) )
+WHERE
+  product_type IS NOT NULL
+UNION ALL
+SELECT
+  *
+FROM ( /* random products from non-fans*/
+  SELECT
+    a.PlayerID,
+    b.id,
+    b.time_bucket,
+    CAST (ROUND((RAND()-0.499))* ROUND(1 + RAND() * (2)) AS INT64) AS product_type
+  FROM
+    `bq-ml-football.actionable.customers`a,
+    `bq-ml-football.curated.features-events` b
+  WHERE
+    a.FavTeam IS NULL )
+WHERE
+  product_type >0
 ```
