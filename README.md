@@ -151,7 +151,7 @@ FROM ( /*40% chance buys a product type 1 at the beginning if they have a fav te
     AND (b.ev_penaltymissed >0
       OR b.ev_penaltyscored>0)
   UNION ALL
-    /*40% chance buys a product type 3 if they have a fav team, bet between timebuckets 8 and 14, more than 2 subs and group in 0,1,5*/
+    /*40% chance buys a product type 3 if they have a fav team, between timebuckets 8 and 14, more than 2 subs and group in 0,1,5*/
   SELECT
     a.PlayerID,
     b.id,
