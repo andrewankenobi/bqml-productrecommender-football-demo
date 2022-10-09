@@ -2,7 +2,7 @@
 
 This outsources demo showcases how to create a product recommender system to be used to recommend products to fans during football games.
 
-## Preparation
+## Data Preparation
 
 ### Baseline Data
 The foundational data is available [in this Google Drive folder](https://drive.google.com/drive/folders/1V5q155BDNohhlCbMxIp5YbDMJOThU5kG?usp=sharing); three files are available: 
@@ -103,7 +103,7 @@ FROM
 ```
 
 ### Generate product buying activity
-- In the `actionable` dataset, persist the result of the query below in a table called `customers-activity`:
+In the `actionable` dataset, persist the result of the query below in a table called `customers-activity`:
 ```
 SELECT
   *
@@ -195,9 +195,10 @@ WHERE
   product_type >0
 ```
 
+## Model Preparation
 
 ### Create the model training data
-- In the `curated` dataset, persist the result of the query below in a table called `model-training`:
+In the `curated` dataset, persist the result of the query below in a table called `model-training`:
 
 ```
 SELECT
@@ -231,4 +232,17 @@ FROM (
     `bq-ml-football.actionable.customers` d
   ON
     b.PlayerID=d.PlayerID)
+```
+
+
+## Create a CustomerGroup Classifier model
+In the `actionable` dataset, training a KMEANS model called `CustomerGroupClassifier` defined as follows:
+```
+CREATE OR REPLACE MODEL
+  `bq-ml-football.actionable.CustomerGroupClassifier` OPTIONS(MODEL_TYPE='KMEANS',
+    num_clusters = 6 ) AS
+SELECT
+  * EXCEPT(CustomerGroup)
+FROM
+  `bq-ml-football.curated.model-training`;
 ```
