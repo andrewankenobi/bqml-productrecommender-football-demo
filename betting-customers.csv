@@ -1,0 +1,499 @@
+PlayerID,FavTeam,CustomerYears,CustomerGroup
+8094287d-bc05-456b-9bd6-ebdd85015c36,Burnley,11,2
+af22d9b6-fd1e-42e7-944a-2403172a224e,Crystal Palace,1,3
+6daa5a2e-bbed-46af-8f3b-3f5539465183,Aston Villa,9,4
+1de22d7f-60e1-4557-bfa8-5602a16b1a74,Fulham,5,1
+90919beb-d9de-4367-977c-ecd8a9e2a1e7,Portsmouth,2,3
+b8beade0-804c-4143-9c19-fad1fa454f80,Newcastle United,10,0
+7eb97e9a-66fb-456b-a1bf-08d79117f48f,Stoke City,1,1
+ee048d21-ab6f-4ec5-b8ae-d10fcf21656d,Hull City,9,4
+7f9aa4ef-4b51-42e4-be8d-63b83961c09a,Liverpool,12,2
+cf7794bb-d6da-4546-a542-5698952278f1,Norwich City,11,2
+1cc69226-2daa-4830-99a3-c153f165ee63,Wigan Athletic,7,3
+040a4e08-dbb0-4433-99be-19d866f849d2,Blackpool,6,2
+eaf53fed-776a-46fe-8111-f9822871eba5,Everton,14,0
+402c0318-c17c-420e-83bd-050a50e355f3,Wolverhampton Wanderers,8,3
+d2b162c9-c32b-421e-9bfe-6310b9b4a7a8,Middlesbrough,10,1
+a8fe0848-5465-4f51-81c2-b17588829070,Bolton Wanderers,0,0
+540d0310-6189-42d8-8aab-b471a9fd1f0c,Charlton Athletic,10,2
+7d9b90da-8f91-41ac-84e6-e6589308b0de,Huddersfield Town,13,4
+aee5df31-de6a-4a55-a1b8-4703a408a97a,Queens Park Rangers,9,1
+dc1bf6e3-a278-460b-84dd-df64554b2527,Sheffield United,5,4
+eb99165a-7b69-497b-be52-0ed1a38f8f04,Manchester United,10,1
+564093cc-7c44-4592-925b-f83f588801c2,Ipswich Town,6,1
+42109cb0-0383-4527-bd00-a6c68b14f639,Chelsea,9,5
+358d5d56-08c4-4e08-9b16-f7437f2e6c0f,Cardiff City,9,3
+e088cce5-729c-49d6-9b74-16442c0352de,Brentford,11,5
+61d13e6b-9be6-4c89-a4f2-4afb3e50c5f3,West Ham United,12,3
+152a0cd7-aaa6-449d-b41a-a94216228f5e,Swansea City,7,3
+bc22064d-e03b-4328-9af0-fd4e1adea366,Leeds United,7,5
+5fcd7671-b604-4d23-ab50-0fdceb8b47d5,Leicester City,1,3
+9c8675be-14a8-41c6-9b49-dc9a2b67bf0e,Sunderland,6,5
+add12f77-7ab1-4699-a170-34f9fb60dd5b,Manchester City,10,3
+b2ec6610-b1c2-491c-bf32-f1bc81de6fe6,Reading,10,2
+0d4075f3-1d94-414e-ae10-5ae112670f4a,AFC Bournemouth,14,1
+2e29e095-7acc-47f5-8927-2c5b33689901,,6,5
+93a303e6-3b4d-4afb-973e-474ec15d5a75,West Bromwich Albion,3,3
+88761972-4bc4-4044-b157-5e5d53de2def,Tottenham Hotspur,5,5
+511b1d0f-aab5-43eb-a017-34be7b4d6f8e,Watford,12,4
+c8cb6594-ab1c-40f8-b7cb-0904850dd197,Derby County,6,3
+7436c0df-49e2-49a4-a58b-6ac591ac068b,Brighton & Hove Albion,7,2
+de71cec6-e095-470b-aca1-9cfe11a99f54,Arsenal,8,1
+cc2aafac-357a-4927-8db4-2b06fa8b3246,Blackburn Rovers,15,1
+51f36654-1173-4c62-97b4-a4feee393354,Birmingham City,4,4
+840aa5f2-76aa-475c-be8a-0dc9be5844ab,Southampton,5,2
+e6fb328c-b4a6-4ad0-a48e-452a64c4e653,Burnley,13,4
+d59ed6d5-87ca-4bc3-9bef-c875f5ba2dbd,Crystal Palace,12,4
+f0ce29e1-56b1-4a37-9c71-0190bb499d44,Aston Villa,8,1
+2c965aad-d692-49ee-92c0-eccd5da581ae,Fulham,6,4
+4357ff6d-1186-4155-8ce5-eae76bad164f,Portsmouth,13,1
+e0fd42d3-05dd-439d-8734-fad5b57a15f0,Newcastle United,13,0
+b618a774-3501-44ba-863e-18127aa1b7c2,Stoke City,11,4
+ebce7c1e-d1d9-40ae-bbec-82f7e316b07b,Hull City,9,4
+ff9a6b8c-5e22-4894-99a4-3f410e41dc81,Liverpool,1,5
+c8bb853c-47e4-4837-a464-c0ea25d2c45d,Norwich City,3,2
+9cb23e67-589d-4ed5-a8af-77159179bd42,Wigan Athletic,9,4
+9c8e0fba-ea96-4e76-a386-738d953ecff1,Blackpool,11,2
+39ce090f-e09a-4ac2-a207-89603934e069,Everton,7,4
+77997301-4acf-4a8f-bda7-c8d0741738e9,Wolverhampton Wanderers,12,4
+52cb1d3e-616d-4232-bea4-e2bcfa8feb58,Middlesbrough,4,0
+3b71572e-119e-433d-884b-78f5c0f83e9e,Bolton Wanderers,6,1
+86da98de-d868-4d85-9124-99a24a946df3,Charlton Athletic,3,0
+214a094f-10a6-461f-a7c5-3d5d97d72db2,Huddersfield Town,14,1
+882d7dbc-f93f-4ca9-9281-015bade7c64a,Queens Park Rangers,4,2
+1d197f61-6327-4f83-975f-c70c69397a90,Sheffield United,2,4
+77749236-bff5-42d8-8df2-fdfd442391eb,Manchester United,12,2
+310155b2-c403-4a88-a162-995e6db90ef6,Ipswich Town,5,5
+5e8ea699-bf8d-4988-9933-ecb82a7bccc8,Chelsea,9,3
+ede33158-1194-440b-bb03-55310d1d6d7f,Cardiff City,1,1
+8166554c-3b58-474c-8865-92bb22482c3b,Brentford,1,5
+0ceb5525-563c-44fd-b551-0ac22853b9d7,West Ham United,11,4
+d418351a-698e-449b-9404-45469c4affbb,Swansea City,13,3
+6f1aa9a0-4228-4565-87d6-5aaa3cd1db1d,Leeds United,5,3
+9f3c1703-ee41-4822-97ff-25fa8a9d6444,Leicester City,15,2
+0614afab-0a52-43a0-bb6e-10de7acaaee5,Sunderland,11,4
+67cf1282-abdd-4d3a-b649-d897601bcf05,Manchester City,5,2
+ea199f82-d24e-436e-8336-a63941a48214,Reading,10,5
+3b64fa0a-147c-47d0-95c8-e07043e3fafa,AFC Bournemouth,5,4
+ba238d50-4dce-4f42-9d0d-f8c67a54e37e,,3,1
+5ef77dfc-3495-44cb-ba72-8e0fec4340bd,West Bromwich Albion,1,1
+de6eeaf3-8aa2-4755-957e-db7e1d0b410d,Tottenham Hotspur,10,3
+8478b11b-e185-4829-8d3c-da82bd9023bb,Watford,12,4
+84574208-e519-432a-aa97-47ec492b5ad3,Derby County,13,4
+7472f557-7825-4e48-8bc8-001f9b4249d4,Brighton & Hove Albion,8,2
+011deaf4-28d9-4bbb-a6bd-8be4c855a8dd,Arsenal,2,4
+cdf7dcbd-f831-42ba-81e8-0e98282701a0,Blackburn Rovers,1,1
+7e04773a-9df9-4e8c-8faf-34f63b5e159e,Birmingham City,4,3
+31a9a33e-b875-4da0-9602-1c4d9d74d84b,Southampton,5,3
+eafab75e-bf23-48df-8335-fa50b27a73e6,Burnley,1,3
+4144af25-58c0-4ea0-bed5-18715856fca0,Crystal Palace,4,0
+c8ec5fdc-613a-4ecd-9534-1064d2a46a2f,Aston Villa,10,3
+6bed8baf-a9f6-46c1-95b0-eb81f7ed118f,Fulham,8,5
+f35328b3-54ee-46b3-8e56-43fbbfcb85ca,Portsmouth,14,3
+cd0f8ee6-8501-4512-94d1-20aeb1c022f4,Newcastle United,8,5
+c7f86068-76ea-42ac-9ce0-638460c93de7,Stoke City,6,4
+529573be-9b14-4887-9251-fa80e1726bc8,Hull City,1,3
+43c05a32-4662-4f46-8dae-ba89fb86ff83,Liverpool,7,5
+9d4adfb4-9d1f-42de-a7a0-5047d51749b3,Norwich City,0,2
+2c989c3a-de4b-456d-91d4-bc066eb05064,Wigan Athletic,9,4
+aaa56a18-4278-4b61-a83f-9340867bc358,Blackpool,1,2
+0f4e216f-8f81-469d-9cda-1b57552aac5c,Everton,6,0
+49a14aae-7b64-4c26-ba56-52ebbf9d1f27,Wolverhampton Wanderers,3,4
+828de7dc-0fdc-4303-a485-ee129a89ae94,Middlesbrough,4,1
+6eee392b-6217-477e-9ad7-76992626f325,Bolton Wanderers,0,2
+58b606a2-3102-491c-9153-921eb336b20a,Charlton Athletic,3,3
+fdaad731-8000-4bb1-b917-df47ac7aa1bd,Huddersfield Town,6,3
+bb7f752f-73b7-49bd-bc27-bb51a890a563,Queens Park Rangers,1,5
+6d09caf8-4c2e-4165-b9c2-44da8aca70dd,Sheffield United,12,4
+139d1613-f6e7-4678-a01e-11567c45bf64,Manchester United,14,4
+af17e0e1-a0b6-4c74-a602-9a58fe9bb2b0,Ipswich Town,1,4
+b231ce42-39a4-4fe4-a41e-9d43974923d4,Chelsea,10,1
+a25d98c2-2552-4f44-9ce2-91ef19eb8a4b,Cardiff City,14,2
+519cb05e-aaf4-4be1-894d-33af4f477f4b,Brentford,14,0
+d33756b6-e99a-442a-a5d3-6f33c24d3a5f,West Ham United,5,4
+f0a5be4a-2125-45fc-a952-08b5652f9c83,Swansea City,14,0
+ed900840-ed5e-43c1-a933-1ece45281080,Leeds United,15,1
+24c97637-56d5-4f18-ad8c-0dac61a0a147,Leicester City,9,4
+eb3af74d-ec82-4e6f-9edb-b4dc723e519d,Sunderland,10,0
+53b1be3a-2557-4959-ae70-3e1407ace826,Manchester City,14,2
+b1065921-c16b-4ff8-aab0-60f5e426d734,Reading,7,3
+b4ec850e-30cb-4840-8cfd-237f26ccf2ac,AFC Bournemouth,13,4
+37699525-e1cb-46e2-8b97-d498865d503f,,8,5
+1b49c9b0-e048-4217-8957-48f9073657be,West Bromwich Albion,14,3
+7430cd3c-5333-46ab-b512-1fe1c36274c1,Tottenham Hotspur,10,4
+277ae19a-cf13-4737-b23f-b8a684a85ff2,Watford,14,0
+1752d2e9-2079-4170-acdb-6f464e98ff2c,Derby County,6,4
+93561046-44fa-4ed3-b2a6-fc43c9fe55ed,Brighton & Hove Albion,7,0
+b10725f0-50fd-4585-9c12-9652858ca024,Arsenal,5,4
+9eff8c15-aaf2-4b40-b19d-240ae503b7af,Blackburn Rovers,4,3
+3b164176-fd74-49db-b81a-f0f2d585dd46,Birmingham City,6,3
+da644ad7-148c-41d4-96de-84b50427bdfb,Southampton,14,5
+2265efad-dc0a-43b4-813b-170d13b704c0,Burnley,6,2
+1ade3beb-b279-4747-afca-00329da07be3,Crystal Palace,10,5
+673c96a5-71c8-4e1a-89b5-6189746655d2,Aston Villa,0,5
+4654875c-0c3f-4662-828a-330db0466bce,Fulham,8,3
+2296e4a3-d7da-46a8-a8dd-c6e86c357ce9,Portsmouth,5,5
+2862de94-1ad0-4a4e-b17d-ff289498f664,Newcastle United,1,1
+4298fdb4-5f57-48bc-8e75-157c21e80216,Stoke City,5,0
+523a0a01-a5df-45c3-8087-8492b62c93c9,Hull City,13,1
+00506974-4ac4-44ee-ae87-92dcbd790313,Liverpool,10,2
+61d75b3a-80f6-4b6a-8a97-18463df9fbfa,Norwich City,3,4
+e2432a0a-7936-41db-953a-201e8583f075,Wigan Athletic,11,1
+177a8235-df3d-45eb-8d1d-5296f8268d7c,Blackpool,14,4
+0b36e069-6ab2-49aa-98e6-2d7bef157c30,Everton,3,4
+496b3194-65bf-4bc3-8257-721595d0f9b6,Wolverhampton Wanderers,7,3
+7b77bc1c-6fba-4de8-9784-a2e67d587d0d,Middlesbrough,6,2
+7536553b-eba1-4802-83b6-37a588e10541,Bolton Wanderers,2,3
+31aa3444-4662-4ff2-99ab-7b264f9d4c7f,Charlton Athletic,10,2
+f9504c27-13c2-4b9f-88f0-8beee7f295aa,Huddersfield Town,4,2
+7c1592ba-1391-4689-a135-f48bea52fa7b,Queens Park Rangers,3,4
+fac4ef9d-ad03-4cd7-a2d5-784c9ad3c073,Sheffield United,6,1
+163e6789-6246-4b02-bdc6-edc79aa6eebd,Manchester United,12,1
+c6f1f192-fc16-40bf-b248-ee9a6fc1edd6,Ipswich Town,15,4
+29b84da1-631d-4c18-b704-cac631514cc7,Chelsea,14,4
+516e66ac-9dec-4e8a-9619-fb67725a040d,Cardiff City,11,3
+85551c41-a9b6-4fd2-a9e5-bad97cf79eff,Brentford,2,4
+23bcc843-301a-4bea-858e-f810bb4bb79f,West Ham United,10,4
+302ca17d-c5e0-4f71-a7a9-8ba598fb418b,Swansea City,3,2
+ceb5da19-00e2-4ee0-9506-a0cb811170b8,Leeds United,9,3
+dd1428fd-a6df-4319-86eb-dfb07422c435,Leicester City,6,2
+36a9a034-770a-4570-b67c-e58939a0d048,Sunderland,2,4
+59110886-d909-4e36-a505-1977b58fbe71,Manchester City,3,2
+d3f4a1e2-2db5-42eb-82c3-3766e8e9364b,Reading,13,3
+613eaadf-fa89-49d8-b9d0-a2a85ec87784,AFC Bournemouth,2,1
+5e066e0e-a81e-46d4-a697-99285bd55f4d,,0,3
+8cc66d7c-a4f1-4fad-b196-1d7f2162c0ea,West Bromwich Albion,9,5
+705b80f3-c870-4092-bda4-7f11e0b90066,Tottenham Hotspur,13,1
+95d4c31c-b893-4e3b-8700-a169b8f99ab8,Watford,7,1
+989038b2-abfb-4e51-8454-eaed49516ca9,Derby County,6,2
+761d98b8-c026-48eb-9dfe-b25dea644fb6,Brighton & Hove Albion,2,5
+d1edd971-4c35-45ee-bdeb-527122515e17,Arsenal,12,2
+00e2f3b6-ef49-486c-80ba-221ba89df6ea,Blackburn Rovers,4,2
+78e962ac-364b-46ee-8c36-38e46382815e,Birmingham City,2,2
+d9c37883-a872-465a-8c62-b7869d444fa4,Southampton,12,5
+06b1da2d-6f4b-4ddc-b5a9-aad0db3e1057,Burnley,8,4
+58b394ad-c2a4-4ec5-8212-5b411686c90f,Crystal Palace,13,3
+f205b2ad-8608-4507-b5e2-aea30f4d5557,Aston Villa,14,3
+c9cd7a36-2a24-4e4e-90bd-ee01809aba08,Fulham,12,1
+f0550809-f573-4bec-a4ad-6f45a634de0e,Portsmouth,5,5
+45e6cdd6-991d-4eaf-81f6-9af9f583c9f6,Newcastle United,13,2
+f01fa6ab-0161-4ad7-a8ea-961b80271eb2,Stoke City,1,1
+1b92fb14-86fd-468f-accd-60a394d3bc6a,Hull City,4,2
+a555f5df-3705-4a77-9681-e3fc322addb6,Liverpool,9,3
+efd8d840-5532-4419-a34b-5c17135d1b13,Norwich City,4,2
+2f488f57-7706-463b-854e-afaac1992d2d,Wigan Athletic,2,1
+1252e6df-b2cb-4bdb-823c-daa8ea3386bc,Blackpool,11,1
+027c62ce-eba1-4cf4-b483-811030e62cd8,Everton,12,3
+c0d644b9-9920-4e0e-b7e3-4f47ef31fa66,Wolverhampton Wanderers,4,3
+0ca3886e-f8b6-4bdf-967f-74f51da47a5f,Middlesbrough,12,3
+dc9d5a1d-718a-4296-bb6c-c39e3b866128,Bolton Wanderers,6,1
+932e9156-b8f9-42de-9c7f-f492c416912d,Charlton Athletic,12,3
+4753cc87-afc3-4320-9d41-3d6370f7e91c,Huddersfield Town,1,4
+8e0838f2-1d70-41a2-a9a9-b889fb8dd54e,Queens Park Rangers,13,3
+0fd05a66-cd5e-4035-baa6-cdae8cf599f9,Sheffield United,15,0
+873d28b2-570d-4174-be7c-3f350a179c86,Manchester United,12,2
+028541fc-ad47-4420-b3a5-41302c16cc21,Ipswich Town,9,2
+8eb08ae9-ab31-49f6-b27f-4a736dcfd1a5,Chelsea,3,2
+1047b1c6-5096-4f46-96f4-7c6613971a57,Cardiff City,9,2
+a0f9240d-0ec2-4f71-b422-7c91f32e4290,Brentford,0,2
+b09c940c-3721-4e45-ac43-5ae1bbeeee35,West Ham United,1,2
+e5cfbabf-3e12-4a47-b553-9a679b83cbd9,Swansea City,13,1
+c1ab297e-4d15-4ec5-8757-66abe26462fc,Leeds United,7,4
+a310b093-88d7-45ee-a8ff-2a82eac682d8,Leicester City,14,1
+7c795dfb-567f-4bbf-bf47-6bb81201b1d8,Sunderland,11,4
+8b5a77dd-8da1-45b3-a025-4df330ead5a8,Manchester City,10,2
+25d259e0-3dda-4242-b2f5-066be9941c48,Reading,2,3
+294a982b-f174-4044-8ac8-27b420551009,AFC Bournemouth,4,1
+c8c951d0-9a13-4060-ba7d-5b4faa68977c,,6,0
+58834f86-8f4d-4070-ac85-21f36f45ff64,West Bromwich Albion,1,1
+f3000795-60bb-476b-94f9-166026c9d08f,Tottenham Hotspur,2,2
+d671aab1-53d5-4c26-8a32-d708be58f4d3,Watford,15,1
+4b06943a-3d20-47be-a43c-28e16c20022a,Derby County,2,4
+73b6e473-128c-433a-9a8e-acc9631adc5b,Brighton & Hove Albion,1,3
+5ff01475-5724-4e7b-8ba7-921007f57082,Arsenal,8,0
+19e85c5c-664c-4270-998c-725fab544f46,Blackburn Rovers,4,2
+6571ddbd-8fbd-48c3-94d9-688034764632,Birmingham City,10,4
+7d9afe06-de07-401e-94d8-227c0e471f4e,Southampton,10,1
+13c80c3b-5785-4d8b-88ed-4a4a584031b6,Burnley,14,1
+2e1d6cf2-b27d-44e8-b078-d4cacfafaecc,Crystal Palace,12,2
+06b676c0-8ec5-4fa4-a6c3-fdbfd96550e4,Aston Villa,3,1
+2151fba6-3db5-497d-96b8-91f5e03a0d7b,Fulham,5,4
+9f15efb1-f5a8-4e52-a184-002fa1973d48,Portsmouth,11,3
+d9e10d3a-349c-4cf1-8baf-b87b6ae4bf1e,Newcastle United,1,2
+dd336fbf-ec5d-49a6-bde7-03d8aa509cef,Stoke City,10,4
+d168f7dc-b0e2-4324-af49-8d6713ab2dd7,Hull City,5,1
+1233e0c2-ef0a-44cb-b92e-1675f319187f,Liverpool,8,2
+3dc7b3e1-888e-4031-b4dc-9389b8a10e89,Norwich City,0,4
+528ebfc3-6e5d-449c-9488-e31ab5e44831,Wigan Athletic,10,2
+328ebf13-fddf-41b5-9380-1d7119f58003,Blackpool,14,4
+b81368df-f102-4ecc-b829-3c3f3983ee49,Everton,1,3
+f1ecb188-4481-4b64-9e45-6f0d7baa18e7,Wolverhampton Wanderers,13,2
+36e5075e-ff31-4621-9881-1d8b365aba8f,Middlesbrough,6,3
+ea66efa6-05ef-4fb2-ae3b-0682266f815f,Bolton Wanderers,1,4
+3106ed3e-fed4-42b3-b520-2d0e6a23c6f9,Charlton Athletic,1,4
+7ad4acc4-b1e3-44c2-aa8e-e0c6c9092cca,Huddersfield Town,8,1
+20dc1edb-f8be-405a-a11e-a47171d8c53c,Queens Park Rangers,3,2
+9d7c5ba2-5588-4987-8a42-02caff0a2306,Sheffield United,14,4
+983f07f0-43ff-4d19-bdcb-b1515fc6e535,Manchester United,11,2
+537f3f6a-fd69-49cc-ba99-e7efcf836b55,Ipswich Town,6,0
+92a661ed-be2d-4124-bd19-dac3010a52dc,Chelsea,14,2
+2ad5cf9c-117f-45f7-9c48-bbbafa0a9aa2,Cardiff City,13,0
+645812ad-e34e-4f80-acbf-a0144efb3ca7,Brentford,9,4
+5118bba3-8120-4927-9ca6-df7d7b403b8a,West Ham United,7,1
+bcb54ce5-8b74-445f-8acd-c310887bd16f,Swansea City,5,0
+1c7238f9-4a1b-4d0c-a50f-f79b0b7ebb8f,Leeds United,2,2
+58ed8525-481a-495f-be34-c095daa91bfa,Leicester City,12,5
+c9c67462-0d64-409d-9663-a5d3f789827d,Sunderland,11,2
+59179cff-fc83-405c-8e54-170c43fa35d2,Manchester City,13,2
+2d18bbe4-4a78-482e-bfe1-1bddb1d18592,Reading,11,4
+43321019-c696-4183-bcee-87c300110753,AFC Bournemouth,3,2
+a62118a1-4956-401a-b515-449f6153987a,,8,1
+cafc964b-d40b-4de7-a6de-c86e14cc4271,West Bromwich Albion,6,1
+cde547f1-1b8f-4148-933b-14912bdb998a,Tottenham Hotspur,4,1
+7e0611a3-99d2-4ed2-a6c9-ef0265142e99,Watford,12,2
+2cb29932-41ef-403d-bc29-d9a4942b4b75,Derby County,2,3
+237863ff-963e-4578-b694-02d7678ced22,Brighton & Hove Albion,11,3
+f21a049d-234b-48f6-b5dc-4ee2d47e8663,Arsenal,4,3
+5edc6fea-c379-4058-916b-9af6a01520a0,Blackburn Rovers,5,3
+8bb60ece-368a-4f3c-b2d4-9a91341600e3,Birmingham City,7,2
+4fb500da-e5c7-459e-840a-97d68ca7e45c,Southampton,0,1
+82732d6d-f587-4372-b4bf-545b03dba3ee,Burnley,13,5
+8d9196c0-2cc8-4e71-aa65-0f1227c21b09,Crystal Palace,6,4
+6da1a894-d23b-4311-9c3d-e98c9808d7b9,Aston Villa,10,2
+8480105a-5713-405d-986b-fe2be11af6fc,Fulham,15,4
+e21fb5f3-421f-4133-a776-228f17f2a0ab,Portsmouth,10,5
+d651b6e6-f1d3-4251-b7ec-be5c401ce32d,Newcastle United,7,1
+8d7d06d9-17bc-45df-a7bb-71fa67c450bb,Stoke City,11,5
+8ee0c1a3-a62f-4457-a69d-4bfd439a8675,Hull City,1,3
+565aa590-40f6-4085-99d4-c2be0d594009,Liverpool,15,2
+c6d6afe8-514c-41a4-abb1-b3117d85a09c,Norwich City,9,1
+0c88186e-4427-45f7-bc74-22291cedba80,Wigan Athletic,11,0
+cd45b5ad-4f8c-476e-87ad-b7d78d24245e,Blackpool,0,5
+48083bda-6181-429d-8810-a33578666adc,Everton,14,3
+296fe2f4-f2a7-44ba-b3b6-dcc3ab2ab400,Wolverhampton Wanderers,13,4
+678812c0-a584-42f1-bfa1-c2af100bdd2e,Middlesbrough,8,2
+92cb0321-8a57-442a-b8bc-15df5bd0edd9,Bolton Wanderers,2,3
+72acf1df-eb9d-4bca-8edd-3a2fbfb50ad9,Charlton Athletic,6,3
+a3e7f7aa-77eb-476d-bc5a-45b161a7cd79,Huddersfield Town,2,3
+96485867-d20e-4022-8946-b3bcd87cb2ad,Queens Park Rangers,1,5
+66991465-fddc-4edd-9b8f-19e7b07654aa,Sheffield United,12,0
+66b29361-5a8a-4d4a-851d-72f35e287558,Manchester United,1,4
+c5cc405b-6146-411b-a363-ad8dc3697c15,Ipswich Town,11,4
+4e503a8f-5259-434c-ab17-514e311f555a,Chelsea,10,4
+cf8ac518-8f3d-49b7-bec0-1d0798553deb,Cardiff City,12,2
+b8f6a154-3f1e-4714-abe8-73cd422383d9,Brentford,4,4
+d624f9e3-66fc-4a2d-909b-14a7f95115f0,West Ham United,8,2
+7be7d18a-8ace-4bd0-89d1-b42244c610be,Swansea City,13,5
+aa435633-f42b-4f06-ae33-46c6516dce20,Leeds United,9,1
+66e24107-cf9d-4fc4-9c5b-8ab008da7ace,Leicester City,11,3
+5a3a3de4-8853-4d19-9b4b-832004f245cd,Sunderland,2,3
+eefece62-53f1-4368-b3d1-856a67edd3d7,Manchester City,6,1
+79854541-056e-401a-bed0-db57fa375e15,Reading,6,3
+91a2eec9-61a9-4741-b2e9-0d01592b6f4b,AFC Bournemouth,1,1
+9f7c14de-016c-436b-b3ff-a01c77527bca,,3,2
+3eb7398d-c725-488b-9c50-522623eacef4,West Bromwich Albion,11,2
+79259d7e-6517-490c-b8a5-ec07ece31d3d,Tottenham Hotspur,10,4
+5f44ff09-dc42-4fec-98cd-39e77d2b0a17,Watford,6,2
+421b6e70-83f9-423d-9c23-e626a7e46e46,Derby County,7,5
+ee349dee-e1ec-4790-808b-c96b68ccee38,Brighton & Hove Albion,14,2
+3097b2b3-aa31-4063-981c-f6706d50bec1,Arsenal,2,4
+432c1972-2605-4179-a8fe-dbe529ca8452,Blackburn Rovers,13,2
+ac88e53f-c1dd-4b01-b76d-ea14593a618f,Birmingham City,7,0
+d51efd8e-e740-4061-8369-a01a81a1afd0,Southampton,10,2
+6ed44a7c-235e-4e70-ba63-30bf7956cb26,Burnley,0,1
+e07f1c44-9942-4a5e-958c-db57b99a3ae5,Crystal Palace,14,2
+bc8ac5cc-646b-4de7-8701-aa76f87cdcf7,Aston Villa,6,4
+6a1e9c00-6c3f-4958-918a-56aa1e12ef35,Fulham,3,1
+5731905a-553e-42ab-bd50-0e8732610a33,Portsmouth,9,3
+6bcebd00-f881-4ba6-b46d-2197f801845d,Newcastle United,9,3
+94772e7f-b45e-4d05-8c71-00f9c7d87828,Stoke City,15,3
+649ef79d-1bee-41ed-9708-361b2f9d7350,Hull City,5,5
+86dea9a4-acb1-402d-a4e7-85a98b6f827e,Liverpool,6,1
+704fbcd2-79d2-4184-9eff-ff3cfbbdb678,Norwich City,10,3
+89ed5840-aaa6-42f3-b685-abf57bbd1135,Wigan Athletic,10,2
+2ed6530c-ff04-4668-b0e1-5b09306cee91,Blackpool,2,3
+c0ba1237-ccc6-41c1-b9b5-561572570545,Everton,3,0
+3d13a320-4105-4943-ba52-ddf9ecbb5366,Wolverhampton Wanderers,13,4
+589dd348-e755-4bd5-922f-9917a9c58407,Middlesbrough,15,5
+8546e9ee-32b6-40de-bdca-78d08f1cb0dc,Bolton Wanderers,12,3
+aca4a851-5957-416c-bdc5-e41ad455e1a3,Charlton Athletic,9,0
+764a1ec1-5986-4974-b0a9-4fd043b970f1,Huddersfield Town,4,3
+47de656f-e050-4cc5-96de-c1d5b62521c9,Queens Park Rangers,2,4
+8fb142ca-48aa-49c3-8be2-384d391dcdf4,Sheffield United,14,4
+9695e045-cb8f-4797-8147-4db695abddb1,Manchester United,14,1
+881f18f8-1fa3-4533-96ea-c0d6ea902618,Ipswich Town,11,4
+b06afb6c-9a4c-42a1-ae1c-fbccdf8c3d3a,Chelsea,13,1
+62a3b546-c9ac-4396-93de-79f3769e760c,Cardiff City,15,2
+34ecaf67-8aaa-467c-9aff-e2cf5e7572e7,Brentford,11,4
+0d5b8edc-91a6-4c9b-8e43-ca9260a83b4e,West Ham United,5,0
+0a2dcd65-8437-4fcf-b57d-bf88a48984cc,Swansea City,14,5
+a66871d7-7271-4dbd-9597-a8f7be1b8a96,Leeds United,15,4
+07543502-f4f2-42ee-9858-02c5c74acdfd,Leicester City,5,3
+6621f8f4-475a-437e-a918-f0e22cd4adae,Sunderland,10,2
+672f28eb-3671-4b3d-9b5e-f22271d55c7a,Manchester City,11,1
+3ee04f00-1760-4a1a-ae15-726ba7afadb3,Reading,9,1
+48ba9f8e-beed-4c26-ac5a-2487d5e80ba1,AFC Bournemouth,10,1
+c917add8-5a74-4929-8816-d22bf6c1b908,,14,0
+411b2002-dd0b-48eb-979d-b9cccf697322,West Bromwich Albion,1,1
+841aa825-70f6-4a89-a31c-b63005462a11,Tottenham Hotspur,6,4
+f48577b8-54a9-4652-91a9-8b6e2c5cfbf0,Watford,13,5
+4c7dbfc5-3c0f-4251-80b6-ed05ce2e4320,Derby County,8,0
+cd4f7351-0e5b-4fdd-8f29-481c58fd60c2,Brighton & Hove Albion,9,5
+0d135598-e901-40d6-8a8d-4596592f4d5a,Arsenal,2,1
+050ffb64-4104-4da3-854e-884eeda619af,Blackburn Rovers,14,1
+27375d6a-4820-4dd3-9789-7d74cc3b9bf2,Birmingham City,8,3
+71e8dd64-bde1-4f45-b072-0b85f03fb8fe,Southampton,3,3
+c0bca7bd-e853-45c8-9a0b-a5c7472b9198,Burnley,8,0
+f5a9ea1c-3bf2-47c1-88aa-4d05d54029bd,Crystal Palace,5,1
+0e497391-ef7b-4d03-b2a0-7124a4e0e907,Aston Villa,10,2
+1a74cdc7-ba89-48ca-8ae1-76bd6131239a,Fulham,6,5
+c64ddfaa-b16a-4208-8832-879202dd5539,Portsmouth,10,1
+85860cdf-1435-4b61-a4d4-fc75d32f5f3f,Newcastle United,3,0
+1d7e4eb7-471a-4e2c-8231-a1b076ce9a3d,Stoke City,1,0
+8e22d78a-122c-4af0-a958-472d32dc2ba2,Hull City,1,2
+13d6cecc-8bfc-4af2-a10a-cbf50ac23230,Liverpool,10,3
+7330ce6e-3a63-49f6-8b23-e6d0177dfe73,Norwich City,3,5
+9461bcc8-7bdf-4a1a-8093-60819409ebd5,Wigan Athletic,7,1
+c2278a65-6def-4985-a824-0761182a51e6,Blackpool,0,2
+2424c0f9-c270-4e9d-bde4-08ca91339e6f,Everton,6,5
+d5f1dc53-ab6d-47ae-a03d-488a817d1564,Wolverhampton Wanderers,1,2
+50829de4-3b4a-4839-a9ca-a6c0bf4c1cc1,Middlesbrough,6,1
+bf768a55-68a9-4b5e-8d2e-e7f963409da8,Bolton Wanderers,1,5
+0acabe47-49c5-486e-850f-f07ef5d64c9c,Charlton Athletic,0,2
+40f07d33-09f4-4a4d-bde5-640698e5734e,Huddersfield Town,4,5
+e4f7bcc6-0cc9-4a75-a255-cb5acbc82e83,Queens Park Rangers,5,2
+26388072-1972-4fe6-8140-c7e47df420f1,Sheffield United,2,1
+1dbb7c96-8926-44ab-8f5e-da9b5a4537a4,Manchester United,3,3
+87175db4-8c9e-4fd9-b10f-236c2ddcd486,Ipswich Town,6,1
+a485f398-e219-4fcd-aca7-2c06e07e194a,Chelsea,15,3
+4ddd247d-5936-42aa-b7e9-19e2fa84324d,Cardiff City,12,3
+3985b6b7-2239-4692-a85f-087d485df6c4,Brentford,11,2
+1f1edae9-e68d-4c74-893c-f4abcc71d629,West Ham United,12,2
+ae86aa99-f59b-4365-b8c4-3894606fcab7,Swansea City,0,2
+f9da326b-db47-4ff5-9765-26b29938c698,Leeds United,6,3
+4b5c9cd1-95f7-4169-ad07-b304a5142544,Leicester City,2,2
+8333a4ea-caa1-44f9-aa31-01b2a86a7714,Sunderland,12,1
+6f15492b-1413-47d8-8876-18a67b1283ac,Manchester City,14,3
+42ad6226-2b1e-4839-ad55-0df88afa23e5,Reading,9,3
+eb268904-0e1b-4174-9a2f-58ba9b9e1463,AFC Bournemouth,1,3
+76125b5d-281f-427e-9e7a-248ad889fe3f,,12,3
+08b31b3f-8c30-4671-9ce8-6887ebaf8ba1,West Bromwich Albion,10,2
+7c9e519b-013a-4ce9-aefa-8c61d7bedcb0,Tottenham Hotspur,9,2
+76201515-4e75-4786-86e8-2ded11341fc1,Watford,8,4
+21226de8-eb3c-4b9a-b419-52c8b5644485,Derby County,7,3
+6fb07408-cbe2-48bd-b138-a422402b26dd,Brighton & Hove Albion,11,3
+eb170ec8-1603-4b80-aeba-09c2cb3c5472,Arsenal,5,2
+7f6604c7-bd89-45a1-bdc6-9451a852cc8b,Blackburn Rovers,4,5
+c64ecd53-915f-4e7c-932a-06c9c4366979,Birmingham City,8,0
+b29c53a3-024f-49b9-86e5-75b2185a1e2b,Southampton,13,1
+3463a51f-0d80-466c-8e6c-af2a2c4a20b3,Burnley,3,2
+da562cc7-021a-4328-b8aa-b8d573f3250b,Crystal Palace,0,4
+cabc12d5-fde7-4432-a7ba-3ff0383deb01,Aston Villa,12,1
+7237539b-cc5b-4ad5-91bf-ad4c21a6a449,Fulham,11,3
+30b91124-27c8-4191-b862-6531d7fa710b,Portsmouth,1,1
+d6494930-a324-4da7-aa74-e854fd732e34,Newcastle United,14,4
+b2d2b62e-546c-411a-8b73-16251af47e5b,Stoke City,5,3
+e70a92a2-6f63-40ed-99e6-e6ed79920daa,Hull City,15,4
+ec81ee42-4c19-4362-857a-412e9091ea35,Liverpool,12,1
+c6130055-8a2e-4c52-8ad1-1db0b2e92faa,Norwich City,8,2
+44aa9a5b-bfa5-4183-b3dc-df3af008b04d,Wigan Athletic,0,1
+06b0c127-8bb7-4105-a27d-32e32949010d,Blackpool,2,5
+023bcdce-299b-4ac5-a9ab-1e8752db2461,Everton,2,2
+3fb23676-f35f-4a17-873b-44c2bf61ef2c,Wolverhampton Wanderers,15,4
+0e89a2bf-63e2-496d-b7ed-6800a82debbf,Middlesbrough,6,3
+31d4f595-9880-4784-aa84-d21ebde27ae0,Bolton Wanderers,5,1
+0a5df730-4db7-4c63-acd0-6dd0bf60a23f,Charlton Athletic,10,2
+cafb23cc-cff1-4f5b-a4e5-d54dfd801022,Huddersfield Town,10,1
+93ba3a20-7ae0-4498-bd75-86738034f835,Queens Park Rangers,2,3
+282366a6-5491-45a6-8546-239657164b02,Sheffield United,11,1
+3083916c-22dc-485e-ab0f-713e6284252b,Manchester United,8,4
+04bfb716-0cd3-4b95-8520-2c42d59ddda8,Ipswich Town,5,1
+47189823-d1d8-47e6-9611-7f590317d40c,Chelsea,5,0
+6ae5c235-e3f1-471d-b645-1732741fa226,Cardiff City,2,4
+b3ddbae6-918e-42d2-972e-6fc9f6b27fe1,Brentford,2,4
+57beedc0-353b-4992-bc25-d0d3eeee1ee4,West Ham United,14,4
+493df188-f0d1-404f-84d5-00bad430ae48,Swansea City,7,1
+980035af-6e13-4ea6-b1e5-d16a41be8531,Leeds United,5,0
+8960225d-3aea-444a-8370-959cad299a9f,Leicester City,7,4
+4f40c9b8-4662-4029-a543-8015a8f08402,Sunderland,4,4
+16a8ce62-f436-4eff-9dc6-d611b9cc6821,Manchester City,4,1
+a6db987a-aa98-4ec7-a2f8-21253e9214c1,Reading,14,3
+088e19b7-004f-419f-9392-98c09d0f56c5,AFC Bournemouth,11,4
+6adc3c25-d90b-4299-ac5a-71afd73e71d6,,10,4
+b4defd41-0fad-472c-acb1-3addb5e04f91,West Bromwich Albion,6,5
+1cc0b3be-6108-43a0-b0d9-4ea5d15b48a7,Tottenham Hotspur,13,4
+6fb40f34-4c06-4a2e-915f-745ba491c2d4,Watford,13,2
+2f0470a8-7f6a-46c7-9e47-8306b15e7f7c,Derby County,9,2
+58877f10-019e-4c01-b12c-6d230f4813fa,Brighton & Hove Albion,14,5
+5da01295-a782-4e91-83ec-d8192708129e,Arsenal,12,2
+ebe1d37a-87a8-4f4a-9099-48376878c5c3,Blackburn Rovers,9,2
+d1c7acd4-6423-44c5-87d3-0b7a0ec39af6,Birmingham City,1,3
+dae63607-0132-40d8-b5fd-f138167d1043,Southampton,1,3
+31fc84b8-9d39-475a-893f-81aee6b59e90,Burnley,11,0
+46f77bcc-9c0a-4d6f-9fa2-171d893feaaa,Crystal Palace,8,2
+933043af-16a8-4ce5-8ffa-3532ef496148,Aston Villa,5,5
+995324cc-8113-48ac-b150-bc2a2f212c7c,Fulham,12,1
+0844dc48-9e5d-4dc5-8668-b5c7aaf1c4c9,Portsmouth,0,3
+d8cce005-ff5f-4c66-badf-9822d1898927,Newcastle United,5,0
+adc6c227-9d1c-4ab7-8ec4-e9fd8122bd3e,Stoke City,7,2
+48042a60-1bd3-4831-a912-3d065528b60c,Hull City,11,1
+c160c20f-71cc-4bcb-bebe-be5203d52b94,Liverpool,3,1
+5fee3bcd-539a-49d5-b407-641fadbc612d,Norwich City,15,4
+122303cd-79e9-42c7-ab06-589fb7f47f1f,Wigan Athletic,10,1
+b316ef4a-81d3-4158-854c-ebf67c30d656,Blackpool,4,4
+cd46e3e8-075d-4950-958c-61d61aea6982,Everton,7,2
+92be011f-2c0b-4d3c-ba9c-250ab884c5e7,Wolverhampton Wanderers,1,4
+858b18a4-83e0-442c-a926-c14187098c8b,Middlesbrough,6,2
+ef2f1312-2914-4643-8d9a-942496d5f68d,Bolton Wanderers,12,5
+679a7de7-f0c0-423c-8c49-74f64ad69ddf,Charlton Athletic,8,4
+a2e627b6-e801-4907-ab0e-4dd62f9024d6,Huddersfield Town,10,5
+cffd2b6f-a9d5-4527-9d28-e6159857c459,Queens Park Rangers,11,0
+044674ab-679f-4b1d-aae6-18db33b77550,Sheffield United,5,4
+626f590b-9377-417e-a6a7-24d593a266bc,Manchester United,14,4
+bde26a12-07db-45fa-9b10-58e20b411b6f,Ipswich Town,5,1
+5fea484f-f615-4674-ab3f-6a637f658e57,Chelsea,0,0
+c510c9ee-7237-4c14-87d1-85f819bab14c,Cardiff City,1,5
+2d965a5c-6c08-4163-908e-4adceada2e3c,Brentford,8,3
+00232cad-2f5c-4f18-9bfc-d7825fb9f97a,West Ham United,15,1
+d42bbe87-1d93-44e4-8172-b27899e6f324,Swansea City,1,1
+4f2e2c95-4c8e-4b57-80d4-ad30b0fad482,Leeds United,13,2
+9bea4c9b-edc5-4852-9765-5f53011cf53d,Leicester City,15,3
+ba9d0a08-6f60-48be-9973-d6218f83312e,Sunderland,4,4
+93e46867-ac19-4e67-90cf-b1ce10bfe357,Manchester City,10,3
+3df10cb2-2d0f-411f-b1a0-04a78c1e72e5,Reading,5,0
+92f3d8f9-e2b6-4222-8f35-9df3e6b32d0c,AFC Bournemouth,1,2
+ab4ab4b6-c776-4f79-9b10-09386bb32ac6,,13,3
+1b5573a2-323d-47b8-a865-ebef8334d3b1,West Bromwich Albion,14,4
+8cdbddc7-8fe3-4eeb-822c-e973debfdc5c,Tottenham Hotspur,7,1
+918378ea-3447-4d86-87e8-7f197a702e79,Watford,13,3
+3102b33d-a3b8-4153-b314-44368b57e6bb,Derby County,10,1
+37df8869-1d2e-402d-8d33-5b443fff889b,Brighton & Hove Albion,3,3
+0940c50e-6374-46c7-9b9c-effd35cb4fef,Arsenal,8,0
+906e7168-fe64-40be-a01b-cec823e8d6e9,Blackburn Rovers,4,2
+22d1c27e-3f62-498e-b7ce-75cfe8764d04,Birmingham City,13,0
+fe74aa9f-806c-42d4-9507-7140e6d0b4d6,Southampton,6,1
+57240ee8-28b4-44b0-9ed3-38586157a74e,Burnley,5,4
+2911ef95-5598-47f0-9afc-4c28bc57f50a,Crystal Palace,12,1
+4b31cdbb-41a3-4a9b-b7cf-034df95756e2,Aston Villa,14,2
+328188d4-c45a-45c1-a0e9-8e1148ce3a1b,Fulham,5,2
+a86a692e-a08d-4d49-9f5f-2e6dde4f993f,Portsmouth,13,3
+713ede92-dfeb-4473-90b3-cfa7b4f47dcc,Newcastle United,8,1
+5c6a5292-08dc-4bb3-8c51-dd82165cbeb1,Stoke City,11,0
+290e5e35-ae80-424b-bd31-81d681aedbc1,Hull City,3,1
+c33fcebe-6453-4cac-a416-713f3c4058ad,Liverpool,2,5
+ddcc420c-89d0-42d9-9f1b-10e5fe46ec45,Norwich City,8,5
+18032d4c-4441-4fdc-af3e-7f099d385972,Wigan Athletic,7,0
+1d673613-f1d9-483a-9490-1e5964f16e49,Blackpool,7,1
+39449a70-edb7-41ba-9ab8-087454325baa,Everton,15,3
+5a8eb007-3e90-47fd-9e4f-112595cd6d41,Wolverhampton Wanderers,12,2
+7b55e6cc-16e5-447c-a77a-a1da87575268,Middlesbrough,2,0
+09b9461f-9a79-4a71-b936-50edde9668e1,Bolton Wanderers,3,2
+0a9553cd-ca25-4144-9725-da80c7cf2f2d,Charlton Athletic,10,0
+aae22716-1ac5-4a2b-b1b4-bb31e53e8c89,Huddersfield Town,6,4
+1a4395e4-d3e2-4a33-8142-da222aec3156,Queens Park Rangers,11,3
+a39b841a-30a7-4e0e-9cb0-2b3efa3503b8,Sheffield United,0,0
+1adcf814-3757-4ae6-a216-71a6c23019a9,Manchester United,8,3
+ea167bff-2c38-48f9-9d65-412773dbfad9,Ipswich Town,4,4
+5f313f0f-52b8-439f-a7c6-9226cea5c1de,Chelsea,0,4
+7442d8a4-c21e-49dd-a6b7-8dd2f9175f68,Cardiff City,0,5
+4f38e637-bda0-4333-a6d9-bfdc766e9e45,Brentford,3,0
