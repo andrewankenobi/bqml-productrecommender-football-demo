@@ -263,10 +263,44 @@ OPTIONS(MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',
        INPUT_LABEL_COLS = ['product_type'])
 AS SELECT * FROM `bq-ml-football.curated.model-training`;
 ```
-
+The resulting recommender model should perform roughly like this:
+![Model Evaluation](https://github.com/AndreUanKenobi/bqml-sportsbetting-demo/blob/main/productpredictorstats.png?raw=true)
 
 
 ## Demo execution
 
 ### Classify customers in group
-In the `curated` dataset, persist the result of the query below in a table called `model-training`:
+Test the *CustomerGroup Classifier* model by running the following query:
+
+```
+SELECT
+*
+FROM
+ML.PREDICT(MODEL `bq-ml-football.actionable.CustomerGroupClassifier`,
+  (
+  SELECT
+    * except(CustomerGroup)
+  FROM
+    `bq-ml-football.curated.model-training`))
+```
+
+**ATTENTION: for simplicity, the query above uses the model training data in input**
+
+
+
+### Recommend Products
+Test the *Product-Predictor* model by running the following query:
+
+```
+SELECT
+*
+FROM
+ML.PREDICT(MODEL `bq-ml-football.actionable.product-predictor`,
+  (
+  SELECT
+    * except(product_type)
+  FROM
+    `bq-ml-football.curated.model-training`))
+```
+
+**ATTENTION: for simplicity, the query above uses the model training data in input**
