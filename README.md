@@ -194,3 +194,41 @@ FROM ( /* random products from non-fans*/
 WHERE
   product_type >0
 ```
+
+
+### Create the model training data
+- In the `curated` dataset, persist the result of the query below in a table called `model-training`:
+
+```
+SELECT
+  * EXCEPT (id)
+FROM (
+  SELECT
+    a.*,
+    b.product_type,
+    CASE
+      WHEN a.home = d.FavTeam THEN 1
+    ELSE
+    0
+  END
+    AS favTeamHome,
+    CASE
+      WHEN a.away = d.FavTeam THEN 1
+    ELSE
+    0
+  END
+    AS favTeamAway,
+    d.CustomerGroup,
+    d.CustomerYears
+  FROM
+    `bq-ml-football.curated.features-events`a
+  JOIN
+    `bq-ml-football.actionable.customers-activity` b
+  ON
+    a.id=b.id
+    AND a.time_bucket=b.time_bucket
+  JOIN
+    `bq-ml-football.actionable.customers` d
+  ON
+    b.PlayerID=d.PlayerID)
+```
