@@ -269,7 +269,7 @@ The resulting recommender model should perform roughly like this:
 
 ## Demo execution
 
-### Classify customers in group
+### Classify customers in groups
 Test the *CustomerGroup Classifier* model by running the following query:
 
 ```
