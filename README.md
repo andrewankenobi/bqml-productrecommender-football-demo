@@ -9,9 +9,9 @@ The foundational data is available [in this Google Drive folder](https://drive.g
 - `matches-raw.csv`
 - `customers.csv`
 
-The same folder contains the BQML export of the models that will be created below:
-- `CustomerGroupClass-model-export`
-- `product-predictor-model-export`
+The [same folder](https://drive.google.com/drive/folders/1V5q155BDNohhlCbMxIp5YbDMJOThU5kG?usp=sharing) contains the BQML export of the models that will be created below:
+- `models/CustomerGroupClass-model-export`
+- `models/product-predictor-model-export`
 
 ## Setting up the environment
 
