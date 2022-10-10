@@ -2,13 +2,18 @@
 
 This outsources demo showcases how to create a product recommender system to be used to recommend products to fans during football games.
 
-## Data Preparation
 
-### Baseline Data
+## Baseline Data and Model Export
 The foundational data is available [in this Google Drive folder](https://drive.google.com/drive/folders/1V5q155BDNohhlCbMxIp5YbDMJOThU5kG?usp=sharing); three files are available: 
 - `events-raw.csv`
 - `matches-raw.csv`
 - `customers.csv`
+
+The same folder contains the BQML export of the models that will be created below:
+- `CustomerGroupClass-model-export`
+- `product-predictor-model-export`
+
+## Setting up the environment
 
 ### Import the baseline data into BigQuery
 - Create a BigQuery project, e.g. `bq-ml-football`
