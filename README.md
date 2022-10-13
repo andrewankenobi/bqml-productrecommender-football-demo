@@ -274,7 +274,7 @@ The resulting recommender model should perform roughly like this:
 
 ## Demo execution
 
-### Classify customers in groups
+### Classify customers in groups in BigQuery
 Test the *CustomerGroup Classifier* model by running the following query:
 
 ```
@@ -293,7 +293,7 @@ ML.PREDICT(MODEL `bq-ml-football.actionable.CustomerGroupClassifier`,
 
 
 
-### Recommend Products
+### Recommend Products in BigQuery
 Test the *Product-Predictor* model by running the following query:
 
 ```
@@ -309,3 +309,966 @@ ML.PREDICT(MODEL `bq-ml-football.actionable.product-predictor`,
 ```
 
 **ATTENTION: for simplicity, the query above uses the model training data in input**
+
+### Operationalize the Pipelin in VertexAI
+
+Below the python notebook definition for creating the pipeline 
+
+```
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "6e21cd85-1e0d-455b-8b01-2ea11a2a9aa7",
+   "metadata": {},
+   "source": [
+    "# Setup\n",
+    "## Packages & Restart Kernel"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "ce308ab0-8dab-41ce-9d6d-716882cf4be6",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "\n",
+    "# The Google Cloud Notebook product has specific requirements\n",
+    "IS_GOOGLE_CLOUD_NOTEBOOK = os.path.exists(\"/opt/deeplearning/metadata/env_version\")\n",
+    "\n",
+    "# Google Cloud Notebook requires dependencies to be installed with '--user'\n",
+    "USER_FLAG = \"\"\n",
+    "if IS_GOOGLE_CLOUD_NOTEBOOK:\n",
+    "    USER_FLAG = \"--user\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "59173641-7995-4b4a-901d-45593e4012a8",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Installing libraries\n",
+      "\u001b[33m  WARNING: The script tabulate is installed in '/home/jupyter/.local/bin' which is not on PATH.\n",
+      "  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.\u001b[0m\u001b[33m\n",
+      "\u001b[0m\u001b[33m  WARNING: The script strip-hints is installed in '/home/jupyter/.local/bin' which is not on PATH.\n",
+      "  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.\u001b[0m\u001b[33m\n",
+      "\u001b[0m\u001b[33m  WARNING: The script jsonschema is installed in '/home/jupyter/.local/bin' which is not on PATH.\n",
+      "  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.\u001b[0m\u001b[33m\n",
+      "\u001b[0m\u001b[33m  WARNING: The scripts dsl-compile, dsl-compile-v2 and kfp are installed in '/home/jupyter/.local/bin' which is not on PATH.\n",
+      "  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.\u001b[0m\u001b[33m\n",
+      "\u001b[0m\u001b[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n",
+      "cloud-tpu-client 0.10 requires google-api-python-client==1.8.0, but you have google-api-python-client 1.12.11 which is incompatible.\u001b[0m\u001b[31m\n",
+      "\u001b[0m\u001b[33m  WARNING: The script tb-gcp-uploader is installed in '/home/jupyter/.local/bin' which is not on PATH.\n",
+      "  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.\u001b[0m\u001b[33m\n",
+      "\u001b[0m"
+     ]
+    }
+   ],
+   "source": [
+    "# Install Python package dependencies.\n",
+    "print(\"Installing libraries\")\n",
+    "! pip3 install {USER_FLAG} --quiet google-cloud-pipeline-components kfp\n",
+    "! pip3 install {USER_FLAG} --quiet --upgrade google-cloud-aiplatform google-cloud-bigquery\n",
+    "! pip3 install {USER_FLAG} --quiet db-dtypes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "cef02bbe-97c0-45e6-af48-1090cbd02207",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Automatically restart kernel after installs\n",
+    "import os\n",
+    "\n",
+    "if not os.getenv(\"IS_TESTING\"):\n",
+    "    # Automatically restart kernel after installs\n",
+    "    import IPython\n",
+    "\n",
+    "    app = IPython.Application.instance()\n",
+    "    app.kernel.do_shutdown(True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a5f677bb-60b2-431c-9ba7-53e72fb5beec",
+   "metadata": {},
+   "source": [
+    "## Set Project ID and Env Variables"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "0f3b11e6-9a5a-46ab-9d50-f09af9653911",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Project ID:  uki-mlops-dev-demo\n"
+     ]
+    }
+   ],
+   "source": [
+    "import os\n",
+    "\n",
+    "PROJECT_ID = \"\"\n",
+    "\n",
+    "# Get your Google Cloud project ID from gcloud\n",
+    "if not os.getenv(\"IS_TESTING\"):\n",
+    "    shell_output = !gcloud config list --format 'value(core.project)' 2>/dev/null\n",
+    "    PROJECT_ID = shell_output[0]\n",
+    "    print(\"Project ID: \", PROJECT_ID)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "f63489f1-89c9-45c3-8fd6-d9a12cd9833c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "if PROJECT_ID == \"\" or PROJECT_ID is None:\n",
+    "    PROJECT_ID = \"[your-project-id]\"  # @param {type:\"string\"}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "02f39a63-0628-4327-952b-3c4e82cc8d8e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Updated property [core/project].\n"
+     ]
+    }
+   ],
+   "source": [
+    "! gcloud config set project $PROJECT_ID"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "4ac26347-7bc7-4a1a-aaa8-f7e83534e915",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "uki-mlops-dev-demo\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(PROJECT_ID)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "f40a9644-3c0b-4ece-99a9-15b9bd381562",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "20221010162928\n"
+     ]
+    }
+   ],
+   "source": [
+    "# timestamp - refresh when resubmitting pipeline runs\n",
+    "from datetime import datetime\n",
+    "\n",
+    "TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n",
+    "print(TIMESTAMP)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "372636fa-a569-4f3a-b8bb-efb66a8cea4e",
+   "metadata": {},
+   "source": [
+    "## Create Cloud Storage Bucket"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "413d9687-7f5b-41df-91e2-1b70b2ab06f6",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "BUCKET_NAME = \"football-match-events\"  # @param {type:\"string\"}\n",
+    "REGION = \"us-central1\"  # @param {type:\"string\"}\n",
+    "BUCKET_URI = f\"gs://{BUCKET_NAME}\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "b89de60f-c0ea-4757-bb85-408b04aca2c3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "if BUCKET_NAME == \"\" or BUCKET_NAME is None or BUCKET_NAME == \"[your-bucket-name]\":\n",
+    "    BUCKET_NAME = PROJECT_ID + \"aip-\" + TIMESTAMP\n",
+    "BUCKET_URI = f\"gs://{BUCKET_NAME}\"\n",
+    "\n",
+    "if REGION == \"[your-region]\":\n",
+    "    REGION = \"us-central1\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "16aa0745-bfe9-4229-92a7-3707bcd662a9",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "football-match-events in us-central1\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(BUCKET_NAME+\" in \"+REGION)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "8c91acf7-0a26-4af1-bc4e-9148075f92c9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# run this if bucket doesn't already exist\n",
+    "! gsutil mb -l $REGION -p $PROJECT_ID $BUCKET_URI"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "fefd55aa-d8d1-4a07-9f13-c128d8f51ade",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "     15290  2022-10-07T12:08:40Z  gs://football-match-events/all_tables.csv#1665144520869928  metageneration=1\n",
+      "       632  2022-10-07T12:08:42Z  gs://football-match-events/bet-testdata.csv#1665144522728766  metageneration=1\n",
+      "      7502  2022-10-07T12:08:42Z  gs://football-match-events/betting-activity.csv#1665144522186580  metageneration=1\n",
+      "   4906287  2022-10-07T12:08:42Z  gs://football-match-events/bettingCustomers.csv#1665144522017710  metageneration=1\n",
+      "  56003476  2022-10-07T12:08:46Z  gs://football-match-events/events-raw.csv#1665144526990023  metageneration=1\n",
+      "   8186151  2022-10-07T12:08:41Z  gs://football-match-events/matches.csv#1665144521488578  metageneration=1\n",
+      "       586  2022-10-07T12:21:11Z  gs://football-match-events/teams.csv#1665145271184362  metageneration=1\n",
+      "TOTAL: 7 objects, 69119924 bytes (65.92 MiB)\n"
+     ]
+    }
+   ],
+   "source": [
+    "# validate access to the bucket by checking contents\n",
+    "! gsutil ls -al $BUCKET_URI"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4b2212df-ca24-4345-9d53-85df5edc2bb0",
+   "metadata": {},
+   "source": [
+    "## Service Account"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "6ec4b6b2-79e6-4b14-a39f-cc65af4f5c15",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "SERVICE_ACCOUNT = \"vertex-pipelines-sa@uki-mlops-dev-demo.iam.gserviceaccount.com\"  # @param {type:\"string\"}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "e1e8b5f9-795b-4f41-a26a-7dbc091ae34b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "No changes made to gs://football-match-events/\n",
+      "No changes made to gs://football-match-events/\n"
+     ]
+    }
+   ],
+   "source": [
+    "! gsutil iam ch serviceAccount:{SERVICE_ACCOUNT}:roles/storage.objectCreator $BUCKET_URI\n",
+    "\n",
+    "! gsutil iam ch serviceAccount:{SERVICE_ACCOUNT}:roles/storage.objectViewer $BUCKET_URI"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cf5636d9-3d02-41b2-be80-b2aaef6c4d40",
+   "metadata": {},
+   "source": [
+    "## Imports"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "397a18bd-0c2e-44a2-a01e-c462cefd151e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "from typing import NamedTuple\n",
+    "import os\n",
+    "\n",
+    "from google.cloud import aiplatform as vertex\n",
+    "from google.cloud import bigquery\n",
+    "from google_cloud_pipeline_components import \\\n",
+    "    aiplatform as vertex_pipeline_components\n",
+    "from google_cloud_pipeline_components.experimental import \\\n",
+    "    bigquery as bq_components\n",
+    "\n",
+    "from kfp import dsl\n",
+    "from kfp.v2 import compiler\n",
+    "from kfp.v2.dsl import Artifact, Input, Metrics, Output, component"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ce3c7f83-11b0-4b88-973c-7cffd08c8d70",
+   "metadata": {
+    "tags": []
+   },
+   "source": [
+    "# Build Pipeline\n",
+    "\n",
+    "## Pipeline Variables\n",
+    "Make sure the GCS bucket and the BigQuery Dataset do not exist. This script may delete any existing content.\n",
+    "\n",
+    "Your bucket must be on the same region as your Vertex AI resources.\n",
+    "\n",
+    "BQ region us-central1;\n",
+    "\n",
+    "Make sure your preferred Vertex AI region is supported [link]."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 173,
+   "id": "12e72003-148c-48a0-b0bf-79d0adf12f31",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "PIPELINE_JSON_PKG_PATH = \"football-match.json\"\n",
+    "PIPELINE_ROOT = f\"gs://{BUCKET_NAME}/pipeline_root\"\n",
+    "DATA_FOLDER = f\"{BUCKET_NAME}/data\"\n",
+    "\n",
+    "BQ_DATASET = \"football_match\"  # @param {type:\"string\"}\n",
+    "BQ_LOCATION = \"us-central1\"  # @param {type:\"string\"}\n",
+    "BQ_LOCATION = BQ_LOCATION.upper()\n",
+    "BQML_EXPORT_LOCATION = f\"gs://{BUCKET_NAME}/artifacts/bqml\"\n",
+    "\n",
+    "DISPLAY_NAME = \"football-match\"\n",
+    "ENDPOINT_DISPLAY_NAME = f\"{DISPLAY_NAME}_endpoint\"\n",
+    "\n",
+    "image_prefix = REGION.split(\"-\")[0]\n",
+    "BQML_SERVING_CONTAINER_IMAGE_URI = (\n",
+    "    f\"{image_prefix}-docker.pkg.dev/vertex-ai/prediction/tf2-cpu.2-8:latest\"\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 174,
+   "id": "e9c71fd2-0220-46ef-92f7-997ff9abfd27",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Updated property [core/project].\n",
+      "Updated property [ai/region].\n"
+     ]
+    }
+   ],
+   "source": [
+    "if os.getenv(\"IS_TESTING\"):\n",
+    "    !gcloud --quiet components install beta\n",
+    "    !gcloud --quiet components update\n",
+    "!gcloud config set project $PROJECT_ID\n",
+    "!gcloud config set ai/region $REGION"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "26577f48-ed5f-4458-8a54-6798c216dfc7",
+   "metadata": {},
+   "source": [
+    "## Pipeline Components\n",
+    "Starting after data has been loaded into BQ from GCS\n",
+    "\n",
+    "### Split Datasets\n",
+    "\n",
+    "Splits the dataset in 3 slices:\n",
+    "\n",
+    "* TRAIN\n",
+    "* EVALUATE\n",
+    "* TEST\n",
+    "\n",
+    "AutoML and BigQuery ML use different nomenclatures for data splits:\n",
+    "\n",
+    "BQML\n",
+    "How BQML splits the data: https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#data_split"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 175,
+   "id": "460cf1e8-95e7-42da-b29d-dbb166dac3f6",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "@component(\n",
+    "    base_image=\"python:3.9\",\n",
+    "    packages_to_install=[\"google-cloud-bigquery\",\"pandas\",\"pyarrow\",\"fsspec\"],\n",
+    ")  # pandas, pyarrow and fsspec required to export bq data to csv\n",
+    "\n",
+    "def split_datasets(\n",
+    "    raw_dataset: str,\n",
+    "    bq_location: str,\n",
+    ") -> NamedTuple(\n",
+    "    \"bqml_split\",\n",
+    "    [\n",
+    "        (\"dataset_uri\", str),\n",
+    "        (\"dataset_bq_uri\", str),\n",
+    "    ],\n",
+    "):\n",
+    "\n",
+    "    from collections import namedtuple\n",
+    "\n",
+    "    from google.cloud import bigquery\n",
+    "\n",
+    "    project = \"uki-mlops-dev-demo\"\n",
+    "    bq_dataset = \"football_match\"\n",
+    "\n",
+    "    client = bigquery.Client(project=project, location=bq_location)\n",
+    "\n",
+    "    def split_dataset(training_dataset_table):\n",
+    "        training_dataset_table_name = f\"{project}.{bq_dataset}.{training_dataset_table}\"\n",
+    "        split_query = f\"\"\"\n",
+    "        CREATE OR REPLACE TABLE\n",
+    "            `{training_dataset_table_name}`\n",
+    "           AS\n",
+    "           SELECT * EXCEPT (id)\n",
+    "            FROM (\n",
+    "             SELECT\n",
+    "               a.*,\n",
+    "               b.product_type,\n",
+    "               CASE\n",
+    "                 WHEN a.home = d.FavTeam THEN 1\n",
+    "               ELSE\n",
+    "               0\n",
+    "             END\n",
+    "               AS favTeamHome,\n",
+    "               CASE\n",
+    "                 WHEN a.away = d.FavTeam THEN 1\n",
+    "               ELSE\n",
+    "               0\n",
+    "             END\n",
+    "               AS favTeamAway,\n",
+    "             d.CustomerGroup,\n",
+    "             d.CustomerYears,\n",
+    "                CASE(ABS(MOD(FARM_FINGERPRINT(CAST(a.id AS string)), 10)))\n",
+    "                          WHEN 9 THEN 'TEST'\n",
+    "                          WHEN 8 THEN 'VALIDATE'\n",
+    "                          ELSE 'TRAIN' END AS split_col\n",
+    "             FROM\n",
+    "               `{project}.{bq_dataset}.features-events` a\n",
+    "             JOIN\n",
+    "               `{project}.{bq_dataset}.customers-activity` b\n",
+    "             ON\n",
+    "               a.id=b.id and a.time_bucket=b.time_bucket\n",
+    "             JOIN\n",
+    "               `{project}.{bq_dataset}.customers` d\n",
+    "             ON\n",
+    "               b.PlayerID=d.PlayerID) \n",
+    "        \"\"\"\n",
+    "        print(\"Splitting the dataset\")\n",
+    "        query_job = client.query(split_query)  # Make an API request.\n",
+    "        query_job.result()\n",
+    "        return training_dataset_table_name\n",
+    "    \n",
+    "    training_dataset_table = \"football_data_train_test\"\n",
+    "\n",
+    "    dataset_uri = split_dataset(training_dataset_table)\n",
+    "    print(\"ran split_dataset fxn\")\n",
+    "    dataset_bq_uri = \"bq://\" + dataset_uri\n",
+    "\n",
+    "    print(f\"dataset: {dataset_uri}\")\n",
+    "\n",
+    "    result_tuple = namedtuple(\n",
+    "        \"bqml_split\",\n",
+    "        [\"dataset_uri\", \"dataset_bq_uri\"],\n",
+    "    )\n",
+    "    return result_tuple(\n",
+    "        dataset_uri=str(dataset_uri),\n",
+    "        dataset_bq_uri=str(dataset_bq_uri),\n",
+    "    )\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "19b71e4f-7a26-4340-af58-238e90278b0f",
+   "metadata": {
+    "tags": []
+   },
+   "source": [
+    "### Train BQML Models"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 176,
+   "id": "3923df8a-4027-41e0-8b5e-7122486f2852",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def _query_create_customergroup_model(\n",
+    "    project_id: str,\n",
+    "    bq_dataset: str,\n",
+    "    training_data_uri: str,\n",
+    "    model_name: str = \"CustomerGroupClassifier\",\n",
+    "):\n",
+    "    model_uri = f\"{project_id}.{bq_dataset}.{model_name}\"\n",
+    "\n",
+    "    model_options = \"\"\"OPTIONS\n",
+    "      ( MODEL_TYPE='KMEANS', num_clusters = 6\n",
+    "        )\n",
+    "        \"\"\"\n",
+    "    query = f\"\"\"\n",
+    "    CREATE OR REPLACE MODEL\n",
+    "      `{model_uri}`\n",
+    "      {model_options}\n",
+    "     AS\n",
+    "    SELECT\n",
+    "      * EXCEPT(CustomerGroup),\n",
+    "      CASE(split_col)\n",
+    "        WHEN 'TRAIN' THEN TRUE\n",
+    "      ELSE\n",
+    "      FALSE\n",
+    "    END\n",
+    "      AS data_split\n",
+    "    FROM\n",
+    "      `{training_data_uri}`;\n",
+    "    \"\"\"\n",
+    "\n",
+    "    print(query.replace(\"\\n\", \" \"))\n",
+    "\n",
+    "    return query"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 177,
+   "id": "29c20422-be6a-4286-bd7d-9c18fe473361",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def _query_create_productpredictor_model(\n",
+    "    project_id: str,\n",
+    "    bq_dataset: str,\n",
+    "    training_data_uri: str,\n",
+    "    model_name: str = \"product-predictor\",\n",
+    "):\n",
+    "    model_uri = f\"{project_id}.{bq_dataset}.{model_name}\"\n",
+    "\n",
+    "    model_options = \"\"\"OPTIONS\n",
+    "      ( MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',\n",
+    "       AUTO_CLASS_WEIGHTS = TRUE,\n",
+    "       BOOSTER_TYPE = 'GBTREE',\n",
+    "       DATA_SPLIT_METHOD = 'AUTO_SPLIT',\n",
+    "       NUM_PARALLEL_TREE = 1,\n",
+    "       MAX_ITERATIONS = 50,\n",
+    "       TREE_METHOD = 'AUTO',\n",
+    "       EARLY_STOP = FALSE,\n",
+    "       SUBSAMPLE = 0.85,\n",
+    "       INPUT_LABEL_COLS = ['product_type']\n",
+    "        )\n",
+    "        \"\"\"\n",
+    "    query = f\"\"\"\n",
+    "    CREATE OR REPLACE MODEL\n",
+    "      `{model_uri}`\n",
+    "      {model_options}\n",
+    "     AS\n",
+    "    SELECT\n",
+    "      *,\n",
+    "      CASE(split_col)\n",
+    "        WHEN 'TRAIN' THEN TRUE\n",
+    "      ELSE\n",
+    "      FALSE\n",
+    "    END\n",
+    "      AS data_split\n",
+    "    FROM\n",
+    "      `{training_data_uri}`;\n",
+    "    \"\"\"\n",
+    "\n",
+    "    print(query.replace(\"\\n\", \" \"))\n",
+    "\n",
+    "    return query"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f1a261ed-0678-4678-a959-588147cd427e",
+   "metadata": {},
+   "source": [
+    "# Pipeline"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 199,
+   "id": "c7cf2b54-2c86-410f-8258-efa34ed7396a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pipeline_params = {\n",
+    "    \"project\": PROJECT_ID,\n",
+    "    \"region\": REGION,\n",
+    "    \"bq_dataset\": BQ_DATASET,\n",
+    "    \"bq_location\": BQ_LOCATION,\n",
+    "    \"bqml_model_export_location\": BQML_EXPORT_LOCATION,\n",
+    "    \"bqml_serving_container_image_uri\": BQML_SERVING_CONTAINER_IMAGE_URI,\n",
+    "    \"endpoint_display_name\": ENDPOINT_DISPLAY_NAME,\n",
+    "    #\"thresholds_dict_str\": '{\"rmse\": 2.5}',\n",
+    "}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 200,
+   "id": "6c5e55b3-8dac-4ad4-a002-d8376548ca4e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "@dsl.pipeline(name=DISPLAY_NAME, description=\"Rapid Prototyping\")\n",
+    "def train_pipeline(\n",
+    "    project: str,\n",
+    "    region: str,\n",
+    "    bq_dataset: str,\n",
+    "    bq_location: str,\n",
+    "    bqml_model_export_location: str,\n",
+    "    bqml_serving_container_image_uri: str,\n",
+    "    endpoint_display_name: str,\n",
+    "    #thresholds_dict_str: str,\n",
+    "):\n",
+    "\n",
+    "    # Splits the BQ dataset using a custom component.\n",
+    "    split_datasets_op = split_datasets(raw_dataset=bq_dataset, bq_location=bq_location)\n",
+    "    \n",
+    "    # Generates the query to create the customer group BQML using a static function.\n",
+    "    create_customergroup_model_query = _query_create_customergroup_model(\n",
+    "        project, bq_dataset, split_datasets_op.outputs[\"dataset_uri\"]\n",
+    "    )\n",
+    "\n",
+    "    # Builds BQML customer group model using pre-built-component.\n",
+    "    bqml_create_customergroup_op = bq_components.BigqueryCreateModelJobOp(\n",
+    "        project=project, location=bq_location, query=create_customergroup_model_query\n",
+    "    )\n",
+    "    bqml_customergroup_model = bqml_create_customergroup_op.outputs[\"model\"]\n",
+    "    \n",
+    "    # Exports the BQML customer group model to a GCS bucket using a pre-built-component.\n",
+    "    bqml_export_customergroup_op = bq_components.BigqueryExportModelJobOp(\n",
+    "        project=project,\n",
+    "        location=bq_location,\n",
+    "        model=bqml_customergroup_model,\n",
+    "        model_destination_path=bqml_model_export_location,\n",
+    "    ).after(bqml_create_customergroup_op)\n",
+    "    bqml_customergroup_exported_gcs_path = bqml_export_customergroup_op.outputs[\"exported_model_path\"]\n",
+    "\n",
+    "    # Uploads the recently exported BQML customer group model from GCS into Vertex AI using a pre-built-component.\n",
+    "    bqml_customergroup_model_upload_op = vertex_pipeline_components.ModelUploadOp(\n",
+    "        project=project,\n",
+    "        location=region,\n",
+    "        display_name=DISPLAY_NAME + \"_bqml_customergroup\",\n",
+    "        artifact_uri=bqml_customergroup_exported_gcs_path,\n",
+    "        serving_container_image_uri=bqml_serving_container_image_uri,\n",
+    "    )\n",
+    "    bqml_vertex_customergroup_model = bqml_customergroup_model_upload_op.outputs[\"model\"]\n",
+    "    \n",
+    "    # Generates the query to create the product predictor BQML using a static function.\n",
+    "    create_productpredictor_model_query = _query_create_productpredictor_model(\n",
+    "        project, bq_dataset, split_datasets_op.outputs[\"dataset_uri\"]\n",
+    "    )\n",
+    "\n",
+    "    # Builds BQML product predictor model using pre-built-component.\n",
+    "    bqml_create_productpredictor_op = bq_components.BigqueryCreateModelJobOp(\n",
+    "        project=project, location=bq_location, query=create_productpredictor_model_query\n",
+    "    )\n",
+    "    bqml_productpredictor_model = bqml_create_productpredictor_op.outputs[\"model\"]\n",
+    "    \n",
+    "    # Exports the BQML product predictor model to a GCS bucket using a pre-built-component.\n",
+    "    bqml_export_productpredictor_op = bq_components.BigqueryExportModelJobOp(\n",
+    "        project=project,\n",
+    "        location=bq_location,\n",
+    "        model=bqml_productpredictor_model,\n",
+    "        model_destination_path=bqml_model_export_location,\n",
+    "    ).after(bqml_create_productpredictor_op)\n",
+    "    bqml_productpredictor_exported_gcs_path = bqml_export_productpredictor_op.outputs[\"exported_model_path\"]\n",
+    "\n",
+    "    # Uploads the recently exported BQML product predictor model from GCS into Vertex AI using a pre-built-component.\n",
+    "    bqml_productpredictor_model_upload_op = vertex_pipeline_components.ModelUploadOp(\n",
+    "        project=project,\n",
+    "        location=region,\n",
+    "        display_name=DISPLAY_NAME + \"_bqml_productpredictor\",\n",
+    "        artifact_uri=bqml_productpredictor_exported_gcs_path,\n",
+    "        serving_container_image_uri=bqml_serving_container_image_uri,\n",
+    "    )\n",
+    "    bqml_vertex_productpredictor_model = bqml_productpredictor_model_upload_op.outputs[\"model\"]\n",
+    "    \n",
+    "    # Creates a Vertex AI endpoint using a pre-built-component for product predictor.\n",
+    "    endpoint_productpredictor_create_op = vertex_pipeline_components.EndpointCreateOp(\n",
+    "        project=project,\n",
+    "        location=region,\n",
+    "        display_name=endpoint_display_name,\n",
+    "    )\n",
+    "    endpoint_productpredictor_create_op.after(bqml_productpredictor_model_upload_op)\n",
+    "    \n",
+    "    # Deploys the BQML model (now on Vertex AI) to the recently created endpoint using a pre-built component.\n",
+    "    model_deploy_productpredictor_op = (\n",
+    "        vertex_pipeline_components.ModelDeployOp(  # noqa: F841\n",
+    "            endpoint=endpoint_productpredictor_create_op.outputs[\"endpoint\"],\n",
+    "            model=bqml_vertex_productpredictor_model,\n",
+    "            deployed_model_display_name=DISPLAY_NAME + \"_productpredictor\",\n",
+    "            dedicated_resources_machine_type=\"n1-standard-2\",\n",
+    "            dedicated_resources_min_replica_count=1,\n",
+    "            dedicated_resources_max_replica_count=2,\n",
+    "            traffic_split={\n",
+    "                \"0\": 100\n",
+    "            },  # newly deployed model gets 100% of the traffic\n",
+    "        ).set_caching_options(False)\n",
+    "    )\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 201,
+   "id": "8b68ef81-d85b-4412-b814-0cfe7a3b77a6",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "     CREATE OR REPLACE MODEL       `{{pipelineparam:op=;name=project}}.{{pipelineparam:op=;name=bq_dataset}}.CustomerGroupClassifier`       OPTIONS       ( MODEL_TYPE='KMEANS', num_clusters = 6         )               AS     SELECT       * EXCEPT(CustomerGroup),       CASE(split_col)         WHEN 'TRAIN' THEN TRUE       ELSE       FALSE     END       AS data_split     FROM       `{{pipelineparam:op=split-datasets;name=dataset_uri}}`;     \n",
+      "     CREATE OR REPLACE MODEL       `{{pipelineparam:op=;name=project}}.{{pipelineparam:op=;name=bq_dataset}}.product-predictor`       OPTIONS       ( MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',        AUTO_CLASS_WEIGHTS = TRUE,        BOOSTER_TYPE = 'GBTREE',        DATA_SPLIT_METHOD = 'AUTO_SPLIT',        NUM_PARALLEL_TREE = 1,        MAX_ITERATIONS = 50,        TREE_METHOD = 'AUTO',        EARLY_STOP = FALSE,        SUBSAMPLE = 0.85,        INPUT_LABEL_COLS = ['product_type']         )               AS     SELECT       *,       CASE(split_col)         WHEN 'TRAIN' THEN TRUE       ELSE       FALSE     END       AS data_split     FROM       `{{pipelineparam:op=split-datasets;name=dataset_uri}}`;     \n"
+     ]
+    }
+   ],
+   "source": [
+    "compiler.Compiler().compile(\n",
+    "    pipeline_func=train_pipeline,\n",
+    "    package_path=PIPELINE_JSON_PKG_PATH,\n",
+    ")\n",
+    "\n",
+    "vertex.init(project=PROJECT_ID, location=REGION)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 202,
+   "id": "0a526d2f-9f70-4480-926d-78ed1e1c9e58",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "20221010220652\n"
+     ]
+    }
+   ],
+   "source": [
+    "# timestamp - refresh when resubmitting pipeline runs\n",
+    "from datetime import datetime\n",
+    "\n",
+    "TIMESTAMP = datetime.now().strftime(\"%Y%m%d%H%M%S\")\n",
+    "print(TIMESTAMP)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 203,
+   "id": "35f2096e-affb-4383-96b3-e8b40ffdd6c4",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Creating PipelineJob\n",
+      "PipelineJob created. Resource name: projects/106131389347/locations/us-central1/pipelineJobs/football-pipeline-20221010220652\n",
+      "To use this PipelineJob in another session:\n",
+      "pipeline_job = aiplatform.PipelineJob.get('projects/106131389347/locations/us-central1/pipelineJobs/football-pipeline-20221010220652')\n",
+      "View Pipeline Job:\n",
+      "https://console.cloud.google.com/vertex-ai/locations/us-central1/pipelines/runs/football-pipeline-20221010220652?project=106131389347\n"
+     ]
+    }
+   ],
+   "source": [
+    "pipeline_job = vertex.PipelineJob(\n",
+    "    display_name=DISPLAY_NAME,\n",
+    "    template_path=PIPELINE_JSON_PKG_PATH,\n",
+    "    pipeline_root=PIPELINE_ROOT,\n",
+    "    job_id=\"football-pipeline-{0}\".format(TIMESTAMP),\n",
+    "    parameter_values=pipeline_params,\n",
+    "    enable_caching=True\n",
+    ")\n",
+    "\n",
+    "response = pipeline_job.submit()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "6b7fa14e-2bfb-4e3a-a3b8-ae9036576a48",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "compiler.Compiler().compile(\n",
+    "    pipeline_func=train_pipeline,\n",
+    "    package_path=PIPELINE_JSON_PKG_PATH,\n",
+    ")\n",
+    "\n",
+    "\n",
+    "vertex.init(project=PROJECT_ID, location=REGION)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e7cdcc93-caa2-41f2-8aaf-cb15ba8e2c63",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "environment": {
+   "kernel": "python3",
+   "name": "common-cpu.m97",
+   "type": "gcloud",
+   "uri": "gcr.io/deeplearning-platform-release/base-cpu:m97"
+  },
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
+
+```
+
+Testing a API call with the following payload:
+
+```
+{
+  "instances" : [{
+  "home": "Fulham",
+  "away": "Swansea City",
+  "time_bucket": 0.00,
+  "ev_goals": 0.00,
+  "ev_booking": 0.00,
+  "ev_ejection": 0.00,
+  "ev_sub": 0.00,
+  "ev_penaltyscored": 0.00,
+  "ev_penaltymissed": 0.00,
+  "ev_foul": 0.00,
+  "tot_ev": 0.00,
+  "product_type": 1.00,
+  "favTeamHome": 0.00,
+  "favTeamAway": 1.00,
+  "CustomerYears": 1.00,
+  "split_col": "TRAIN",
+  "data_split": true
+}]
+}
+```
+
+will return the following result
+
+```
+{
+ "predictions": [
+   {
+     "centroid_ids": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+     ],
+     "nearest_centroid_id": [
+       5
+     ],
+     "centroid_distances": [
+       3.702729738140863,
+       5.044170928370998,
+       5.639416949547535,
+       3.797848018237923,
+       1.792110098185844,
+       2.993099309943851
+     ]
+   }
+ ],
+ "deployedModelId": "820275256739495936",
+ "model": "projects/106131389347/locations/us-central1/models/1745949698117599232",
+ "modelDisplayName": "football-match_bqml_productpredictor",
+ "modelVersionId": "1"
+}
+```
