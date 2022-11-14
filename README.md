@@ -125,7 +125,7 @@ FROM ( /*40% chance buys a product type 1 at the beginning if they have a fav te
     AS product_type
   FROM
     `bq-ml-football.actionable.customers`a,
-    `bq-ml-football.curated.features-events-cumulative` b
+    `bq-ml-football.curated.features-events-cumulative-cumulative` b
   WHERE
     a.FavTeam IS NOT NULL
     AND a.CustomerGroup =1
@@ -146,7 +146,7 @@ FROM ( /*40% chance buys a product type 1 at the beginning if they have a fav te
     AS product_type
   FROM
     `bq-ml-football.actionable.customers`a,
-    `bq-ml-football.curated.features-events` b
+    `bq-ml-football.curated.features-events-cumulative` b
   WHERE
     CustomerGroup IN (2,
       3,
@@ -169,7 +169,7 @@ FROM ( /*40% chance buys a product type 1 at the beginning if they have a fav te
     AS product_type
   FROM
     `bq-ml-football.actionable.customers`a,
-    `bq-ml-football.curated.features-events` b
+    `bq-ml-football.curated.features-events-cumulative` b
   WHERE
     a.FavTeam IS NOT NULL
     AND a.CustomerGroup IN (0,
@@ -193,7 +193,7 @@ FROM ( /* random products from non-fans*/
     CAST (ROUND((RAND()-0.499))* ROUND(1 + RAND() * (2)) AS INT64) AS product_type
   FROM
     `bq-ml-football.actionable.customers`a,
-    `bq-ml-football.curated.features-events` b
+    `bq-ml-football.curated.features-events-cumulative` b
   WHERE
     a.FavTeam IS NULL )
 WHERE
@@ -227,7 +227,7 @@ FROM (
     d.CustomerGroup,
     d.CustomerYears
   FROM
-    `bq-ml-football.curated.features-events`a
+    `bq-ml-football.curated.features-events-cumulative`a
   JOIN
     `bq-ml-football.actionable.customers-activity` b
   ON
